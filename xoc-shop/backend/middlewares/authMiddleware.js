@@ -1,6 +1,7 @@
 // backend/middlewares/authMiddleware.js
 import jwt from 'jsonwebtoken';
-import { auth, adminOnly } from '../middlewares/authMiddleware.js';
+
+// DON'T import itself here
 
 export function auth(req, res, next) {
   const token = req.headers.authorization?.split(' ')[1];

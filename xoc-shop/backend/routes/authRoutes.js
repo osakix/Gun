@@ -3,6 +3,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../models/User.js';
+import { auth, adminOnly } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 

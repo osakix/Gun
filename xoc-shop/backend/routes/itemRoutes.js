@@ -1,6 +1,6 @@
 // backend/routes/itemRoutes.js
 import express from 'express';
-import { auth } from '../middlewares/authMiddleware.js';
+import { auth, adminOnly } from '../middlewares/authMiddleware.js';
 import Item from '../models/Item.js';
 import User from '../models/User.js';
 
