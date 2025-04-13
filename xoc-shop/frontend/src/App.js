@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Shop from './pages/Shop';
 import Admin from './pages/Admin';
 import Topup from './pages/Topup';
+import History from './pages/History'; // << เพิ่มบรรทัดนี้
 
 function App() {
   return (
