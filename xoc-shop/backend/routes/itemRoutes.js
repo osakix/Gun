@@ -1,6 +1,6 @@
 // backend/routes/itemRoutes.js
 import express from 'express';
-import { auth, adminOnly } from '../middlewares/authMiddleware.js';
+import { auth } from '../middlewares/authMiddleware.js';
 import Item from '../models/Item.js';
 import User from '../models/User.js';
 
@@ -36,3 +36,5 @@ router.post('/roll', auth, async (req, res) => {
   await user.save();
   res.json({ item: randomItem, rarity });
 });
+
+export default router;
