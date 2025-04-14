@@ -25,8 +25,8 @@ export default function AdminPanel() {
   };
 
   return (
-    <NavBar />
     <div className="container mt-5">
+    <NavBar />
       <h2>Edit Profile</h2>
       <input className="form-control mb-2" placeholder="Name" value={profile.name}
         onChange={e => setProfile({ ...profile, name: e.target.value })} />

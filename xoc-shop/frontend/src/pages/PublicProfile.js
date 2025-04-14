@@ -20,8 +20,8 @@ export default function PublicProfile() {
   if (!user) return <p className="text-center mt-5">Loading...</p>;
 
   return (
-    <NavBar />
     <div className="container text-center mt-5">
+    <NavBar />
       <img src={user.avatar} alt="avatar" style={{ width: 100, borderRadius: '50%' }} />
       <h2 className="mt-3">{user.name}</h2>
       <p>{user.bio}</p>
