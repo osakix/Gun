@@ -1,25 +1,35 @@
-import React from 'react';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../services/api';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
 export default function NavBar() {
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
   const logout = () => {
     localStorage.removeItem('token');
     navigate('/login');
   };
-  
+
+  useEffect(() => {
+    api.get('/users/me')
+      .then(res => setUser(res.data))
+      .catch(() => navigate('/login'));
+  }, []);
+
+  if (!user) return null;
+
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="/">Xoc Shop</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="/history">History</Nav.Link>
-          <Nav.Link href="/">Roll</Nav.Link>
-          <Nav.Link href="/topup">Top-up</Nav.Link>
-          <Nav.Link href="/admin">Admin</Nav.Link>
+        <Navbar.Brand>ShadowLink</Navbar.Brand>
+        <Nav>
+          <Nav.Link href="/admin">โปรไฟล์ของฉัน</Nav.Link>
+          <Nav.Link href={`/u/${user.username}`}>ดูหน้า Public</Nav.Link>
         </Nav>
-        <Button variant="outline-light" onClick={logout}>Logout</Button>
+        <span className="text-white me-3">{user.username}</span>
+        <Button variant="outline-light" onClick={logout}>ออกจากระบบ</Button>
       </Container>
     </Navbar>
   );

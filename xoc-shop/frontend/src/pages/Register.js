@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
-import NavBar from '../components/Navbar';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
-import { Container, Form, Button } from 'react-bootstrap';
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  
+
   const register = async () => {
-    await api.post('/auth/register', { username, password });
-    navigate('/login');
+    try {
+      await api.post('/auth/register', { username, password });
+      alert('สมัครสมาชิกสำเร็จ!');
+      navigate('/login');
+    } catch {
+      alert('มีผู้ใช้นี้อยู่แล้ว หรือข้อมูลไม่ถูกต้อง');
+    }
   };
-  
+
   return (
-    <Container className="mt-5" style={{ maxWidth: '400px' }}>
-      <h2>Register</h2>
-      <Form>
-        <Form.Group className="mb-3">
-          <Form.Label>Username</Form.Label>
-          <Form.Control onChange={e => setUsername(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
-        </Form.Group>
-        <Button onClick={register}>Register</Button>
-      </Form>
-    </Container>
+    <div className="container mt-5" style={{ maxWidth: '400px' }}>
+      <h3>สมัครสมาชิก</h3>
+      <input className="form-control mb-2" placeholder="ชื่อผู้ใช้"
+        onChange={e => setUsername(e.target.value)} />
+      <input className="form-control mb-2" placeholder="รหัสผ่าน" type="password"
+        onChange={e => setPassword(e.target.value)} />
+      <button className="btn btn-success" onClick={register}>สมัครสมาชิก</button>
+    </div>
   );
 }
